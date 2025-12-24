@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional, List
 
+# Iniciar o FastAPI
 app = FastAPI()
 
 # Configuração de CORS para permitir que API seja acessada
@@ -32,20 +33,23 @@ tasks = [
         "id": 1766598791932,
         "title": "📌 Nota Importante",
         "desc": "Esta aplicação utiliza salvamento em memória (RAM). Se o servidor ficar inativo, os dados serão redefinidos.",
-        "completed": False
+        "completed": True
     }
 ]
 
+# Listar tarefas
 @app.get("/tasks", response_model=List[Task])
 def get_tasks():
     return tasks
 
+# Criar tarefa
 @app.post("/tasks")
 def create_task(task: Task):
     new_task = task.dict() 
     tasks.append(new_task)
     return new_task
 
+# Atualizar a tarefa por ID 
 @app.put("/tasks/{taskId}")
 def update_task(taskId: int, data: UpdateTask):
     for t in tasks:
@@ -56,6 +60,7 @@ def update_task(taskId: int, data: UpdateTask):
             return t
     raise HTTPException(status_code=404, detail="Tarefa não encontrada")
 
+# Deletar a tarefa por ID
 @app.delete("/tasks/{taskId}")
 def delete_task(taskId: int):
     global tasks
