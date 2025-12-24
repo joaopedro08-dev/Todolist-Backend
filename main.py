@@ -3,10 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional, List
 
-# Iniciar o FastAPI
+# Start FastAPI
 app = FastAPI()
 
-# Configuração de CORS para permitir que API seja acessada
+# CORS configuration to allow the API to be accessed
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -15,7 +15,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Modelos de Entidades para Tarefas
+# Entity Models for Tasks
 class Task(BaseModel):
     id: int
     title: str
@@ -27,7 +27,7 @@ class UpdateTask(BaseModel):
     desc: Optional[str] = None
     completed: Optional[bool] = None
 
-# Banco de dados em memória
+# In-memory database
 tasks = [
     {
         "id": 1766598791932,
@@ -37,19 +37,19 @@ tasks = [
     }
 ]
 
-# Listar tarefas
+# List tasks
 @app.get("/tasks", response_model=List[Task])
 def get_tasks():
     return tasks
 
-# Criar tarefa
+# Create task
 @app.post("/tasks")
 def create_task(task: Task):
     new_task = task.dict() 
     tasks.append(new_task)
     return new_task
 
-# Atualizar a tarefa por ID 
+# Update the task by ID 
 @app.put("/tasks/{taskId}")
 def update_task(taskId: int, data: UpdateTask):
     for t in tasks:
@@ -60,7 +60,7 @@ def update_task(taskId: int, data: UpdateTask):
             return t
     raise HTTPException(status_code=404, detail="Tarefa não encontrada")
 
-# Deletar a tarefa por ID
+# Delete the task by ID
 @app.delete("/tasks/{taskId}")
 def delete_task(taskId: int):
     global tasks
@@ -72,7 +72,7 @@ def delete_task(taskId: int):
         
     return {"message": f"Tarefa {taskId} deletada com sucesso"}
 
-# Iniciar o servidor
+# Start the server
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8000)
