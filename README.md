@@ -43,8 +43,5 @@ Este é o servidor (API) da aplicação To-Do List. Ele foi desenvolvido em Pyth
 ## 🌐 Deploy no Render
 
 O deploy foi realizado no Render. Para garantir que a lista de tarefas funcione corretamente em um único processo de memória, o comando de inicialização configurado foi:
-      ```bash
-      uvicorn main:app --host 0.0.0.0 --port $PORT
-      
-## ✒️ Desenvolvedor
-### João Pedro Dala Dea Mello 
+   ```bash
+   uvicorn main:app --host 0.0.0.0 --port $PORT
