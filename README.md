@@ -1,47 +1,55 @@
 # 🎯 To-Do List - Backend (FastAPI)
 
-Este é o servidor (API) da aplicação To-Do List. Ele foi desenvolvido em Python utilizando o framework **FastAPI** para gerenciar o CRUD de tarefas.
+This is the server (API) for the To-Do List application. It was developed in Python using the **FastAPI** framework to manage task CRUD operations.
 
-> **Nota:** Atualmente, esta API utiliza armazenamento em **memória volátil (RAM)**. Isso significa que os dados são redefinidos sempre que o servidor for reiniciado ou entrar em modo de repouso no Render.
+> **⚠️ Note on Persistence:** Currently, this API uses **volatile memory (RAM)** storage. This means that data is reset whenever the server restarts or enters sleep mode on Render (after 15 minutes of inactivity).
 
-## 🚀 Tecnologias Utilizadas
+## 🚀 Technologies Used
 
 * **Python 3.10+**
-* **FastAPI**: Framework moderno e de alta performance.
-* **Uvicorn/Gunicorn**: Servidores ASGI para produção.
-* **Pydantic**: Para validação de dados e esquemas.
-* **CORS Middleware**: Configurado para permitir acesso do frontend.
+* **FastAPI**: Modern, high-performance framework.
+* **Uvicorn/Gunicorn**: ASGI servers for production.
+* **Pydantic**: For data validation and schemas.
+* **CORS Middleware**: Configured to allow frontend access.
 
-## 🛠️ Funcionalidades
+## 🛠️ Features
 
-* `GET /tasks`: Lista todas as tarefas.
-* `POST /tasks`: Cria uma nova tarefa.
-* `PUT /tasks/{id}`: Atualiza título, descrição ou status de uma tarefa existente.
-* `DELETE /tasks/{id}`: Remove uma tarefa da lista.
+* `GET /tasks`: Lists all tasks.
+* `POST /tasks`: Creates a new task.
+* `PUT /tasks/{id}`: Updates title, description, or status of an existing task.
+* `DELETE /tasks/{id}`: Removes a task from the list.
 
-## 📥 Como rodar o projeto localmente
+## 📥 How to run the project locally
 
-1. **Clone o repositório:**
+1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/seu-usuario/todolist-backend.git](https://github.com/seu-usuario/todolist-backend.git)
+   git clone [https://github.com/joaopedro08-dev/todolist-backend.git](https://github.com/joaopedro08-dev/todolist-backend.git)
    cd todolist-backend
-2. **Crie um ambiente virtual:**
+2. **Create a virtual environment:**
    ```bash
    python -m venv .venv
-   # No Windows:
+   # On Windows:
    .venv\Scripts\activate
-   # No Linux/Mac:
+   # On Linux/Mac:
    source .venv/bin/activate
-3. **Instale as dependências:**
+3. **Install dependencies:**
    ```bash
    pip install -r requirements.txt
-4. **Inicie o servidor:**
+4. **Start the server:**
    ```bash
    uvicorn main:app --reload
-### A API estará disponível em http://127.0.0.1:8000. Você pode acessar na URL em https://todolist-backend-zxq2.onrender.com/tasks
+### The API will be available at http://127.0.0.1:8000. You can access the interactive documentation (Swagger) at http://127.0.0.1:8000/docs.
 
-## 🌐 Deploy no Render
+🔗 Live API Endpoint
+You can access the live backend at:
 
-O deploy foi realizado no Render. Para garantir que a lista de tarefas funcione corretamente em um único processo de memória, o comando de inicialização configurado foi:
-   ```bash
-   uvicorn main:app --host 0.0.0.0 --port $PORT
+https://todolist-backend-zxq2.onrender.com/tasks
+
+## 🌐 Deploy on Render
+
+The deployment was performed on **Render**. Since this application uses in-memory storage, it is crucial to run it as a single process to maintain data consistency across requests. 
+
+The following **Start Command** was configured in the Render Dashboard:
+
+```bash
+uvicorn main:app --host 0.0.0.0 --port $PORT
