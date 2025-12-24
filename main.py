@@ -27,7 +27,14 @@ class UpdateTask(BaseModel):
     completed: Optional[bool] = None
 
 # Banco de dados em memória
-tasks = []
+tasks = [
+    {
+        "id": 1766598791932,
+        "title": "📌 Nota Importante",
+        "desc": "Esta aplicação utiliza salvamento em memória (RAM). Se o servidor ficar inativo, os dados serão redefinidos.",
+        "completed": False
+    }
+]
 
 @app.get("/tasks", response_model=List[Task])
 def get_tasks():
