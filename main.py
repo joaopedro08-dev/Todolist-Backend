@@ -29,18 +29,16 @@ class UpdateTask(BaseModel):
 # Banco de dados em memória
 tasks = []
 
-# Listar as tarefas
 @app.get("/tasks", response_model=List[Task])
 def get_tasks():
     return tasks
 
-# Criar uma tarefa
 @app.post("/tasks")
 def create_task(task: Task):
-    tasks.append(task.dict())
-    return task
+    new_task = task.dict() 
+    tasks.append(new_task)
+    return new_task
 
-# Atualizar a tarefa por id
 @app.put("/tasks/{taskId}")
 def update_task(taskId: int, data: UpdateTask):
     for t in tasks:
@@ -51,12 +49,16 @@ def update_task(taskId: int, data: UpdateTask):
             return t
     raise HTTPException(status_code=404, detail="Tarefa não encontrada")
 
-# Deletar a tarefa por id
 @app.delete("/tasks/{taskId}")
 def delete_task(taskId: int):
     global tasks
+    initial_count = len(tasks)
     tasks = [t for t in tasks if t["id"] != taskId]
-    return {"message": "Deletado"}
+    
+    if len(tasks) == initial_count:
+        raise HTTPException(status_code=404, detail="ID não encontrado na memória")
+        
+    return {"message": f"Tarefa {taskId} deletada com sucesso"}
 
 if __name__ == "__main__":
     import uvicorn
