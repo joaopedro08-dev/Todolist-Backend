@@ -25,3 +25,17 @@ Este é o servidor (API) da aplicação To-Do List. Ele foi desenvolvido em Pyth
    ```bash
    git clone [https://github.com/seu-usuario/todolist-backend.git](https://github.com/seu-usuario/todolist-backend.git)
    cd todolist-backend
+2. **Crie um ambiente virtual:**
+   ```bash
+   python -m venv .venv
+   # No Windows:
+   .venv\Scripts\activate
+   # No Linux/Mac:
+   source .venv/bin/activate
+3. **Instale as dependências:**
+   ```bash
+   pip install -r requirements.txt
+4. **Inicie o servidor:**
+   ```bash
+   uvicorn main:app --reload
+### A API estará disponível em http://127.0.0.1:8000. Você pode acessar a documentação interativa em http://127.0.0.1:8000/docs.
