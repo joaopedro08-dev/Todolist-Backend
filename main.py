@@ -33,7 +33,7 @@ tasks = [
         "id": 1766598791932,
         "title": "📌 Nota Importante",
         "desc": "Esta aplicação utiliza salvamento em memória (RAM). Se o servidor ficar inativo, os dados serão redefinidos.",
-        "completed": True
+        "completed": False
     }
 ]
 
@@ -72,6 +72,7 @@ def delete_task(taskId: int):
         
     return {"message": f"Tarefa {taskId} deletada com sucesso"}
 
+# Iniciar o servidor
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8000)
