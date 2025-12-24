@@ -38,7 +38,7 @@ Este é o servidor (API) da aplicação To-Do List. Ele foi desenvolvido em Pyth
 4. **Inicie o servidor:**
    ```bash
    uvicorn main:app --reload
-### A API estará disponível em http://127.0.0.1:8000. Você pode acessar a documentação interativa em http://127.0.0.1:8000/docs.
+### A API estará disponível em http://127.0.0.1:8000. Você pode acessar na URL em https://todolist-backend-zxq2.onrender.com/tasks
 
 ## 🌐 Deploy no Render
 
